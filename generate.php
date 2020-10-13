@@ -1,10 +1,10 @@
 <?php
 
-function createForm($loop,$database){
+function createForm($loop,$link, $database){
 
-mysql_data_seek($loop, 0);
+mysqli_data_seek($loop, 0);
 
-while($table = mysql_fetch_array($loop))
+while($table = mysqli_fetch_array($loop))
 {
  
 $fname = "source/" . $table[0] . "Form" . ".php";
@@ -39,10 +39,10 @@ $values = "(";
 
 
     $i = 0; //row counter
-    $row = mysql_query("SHOW columns FROM " . $table[0])
+    $row = mysqli_query($link,"SHOW columns FROM " . $table[0])
     or die ('cannot select table fields');
 
-    while ($col = mysql_fetch_array($row))
+    while ($col = mysqli_fetch_array($row))
     {
 
         if ($col[5] != "auto_increment"){

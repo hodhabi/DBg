@@ -1,10 +1,10 @@
 <?php
 
-function createList($loop,$database){
+function createList($loop,$link, $database){
 
-mysql_data_seek($loop, 0);
+mysqli_data_seek($loop, 0);
 
-while($table = mysql_fetch_array($loop))
+while($table = mysqli_fetch_array($loop))
 {
 
 
@@ -12,9 +12,9 @@ $fname = "source/" . $table[0] . "List" . ".php";
 $fnamedel = $table[0] . "Delete" . ".php?";
 $myfile = fopen($fname, "w") or die("Unable to open file!");
 
-$row = mysql_query("SHOW columns FROM " . $table[0])
+$row = mysqli_query($link,"SHOW columns FROM " . $table[0])
     or die ('cannot select table fields');
-$col = mysql_fetch_array($row);
+$col = mysqli_fetch_array($row);
 
 $head = "
 
@@ -97,9 +97,9 @@ fwrite($myfile,"while(\$row = \$result->fetch_assoc()){\n");
 
     $i = 0; //row counter
     
-mysql_data_seek($row, 0);
+mysqli_data_seek($row, 0);
 
-    while ($col = mysql_fetch_array($row))
+    while ($col = mysqli_fetch_array($row))
     {
 
         if ($col[5] != "auto_increment"){

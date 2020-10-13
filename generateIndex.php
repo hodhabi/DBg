@@ -2,7 +2,7 @@
 
 function createIndex($loop){
 
-mysql_data_seek($loop, 0);
+mysqli_data_seek($loop, 0);
 
 $fname = "source/index.php";
 $myfile = fopen($fname, "w") or die("Unable to open file!");
@@ -19,7 +19,7 @@ fwrite($myfile,$head);
 
 
 
-while($table = mysql_fetch_array($loop))
+while($table = mysqli_fetch_array($loop))
 {
 
 $url = "$table[0]" . "List.php";

@@ -16,22 +16,22 @@ $user = $_POST['user'];
 $pass = $_POST['password'];
 
 //connection to the database
-mysql_connect($host, $user, $pass)
+$link = mysqli_connect($host, $user, $pass)
 or die ('cannot connect to the database: ' . mysql_error());
 
 //select the database
-mysql_select_db($database)
+mysqli_select_db($link, $database)
 or die ('cannot select database: ' . mysql_error());
 
 //loop to show all the tables and fields
-$loop = mysql_query("SHOW tables FROM $database")
+$loop = mysqli_query($link, "SHOW tables FROM $database")
 or die ('cannot select tables');
 
-createForm($loop,$database);
-createList($loop,$database);
-createEdit($loop,$database);
-createDelete($loop,$database);
-createDbConnect($loop,$database);
+createForm($loop,$link, $database);
+createList($loop,$link, $database);
+createEdit($loop,$link, $database);
+createDelete($loop,$link, $database);
+createDbConnect($loop,$link, $database);
 createHeader($database);
 createIndex($loop);
 

@@ -1,22 +1,22 @@
 <?php
 
-function createDelete($loop,$database){
+function createDelete($loop,$link,$database){
 
-mysql_data_seek($loop, 0);
+mysqli_data_seek($loop, 0);
 
-while($table = mysql_fetch_array($loop))
+while($table = mysqli_fetch_array($loop))
 {
 
 
 $target = $table[0] . "Edit.php";
 
 $i = 0; //row counter
-    $row = mysql_query("SHOW columns FROM " . $table[0])
+    $row = mysqli_query($link, "SHOW columns FROM " . $table[0])
     or die ('cannot select table fields');
 
-$col = mysql_fetch_array($row);
+$col = mysqli_fetch_array($row);
 
-mysql_data_seek($row, 0);
+mysqli_data_seek($row, 0);
 
 $getRecord = "
 <?php\n
@@ -45,7 +45,7 @@ $values = "(";
 
     
 
-    while ($col = mysql_fetch_array($row))
+    while ($col = mysqli_fetch_array($row))
     {
 
        $col2 = "\$row['$col[0]']";
